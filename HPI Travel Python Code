@@ -1,0 +1,55 @@
+def calculate_average(total: float, num_people: int) -> float:
+    """
+    Calculate the average expense per person in the group.
+
+
+    Args:
+        total (float): Total amount spent during the trip (e.g. 120.0).
+        num_people (int): Total number of participants in the group (e.g. 4).
+
+
+    Returns:
+        float: The average cost per person (e.g. 30.0).
+    """
+    # zero if the group is empty
+    if num_people == 0:
+        return 0.0
+
+
+    # Compute the average expense per participant
+    average = total / num_people
+
+
+    return average
+
+def calculate_balances(participants: dict, expenses: dict, average: float) -> list:
+    """
+    Calculate the final balances for each team member.
+        Inputs:
+            Participants, real expenses per member, average expenses
+        Output:
+            A dictionary that shows the final balances of every member
+    """
+    balances = {}
+    for person in participants:
+        spent = expenses.get(person, 0)
+        balances[person] = round(spent - average, 2) #Only 2 decimals
+    return balances
+def mostrar_resumen(total : float, mean : float, balances : list) -> str:
+
+
+   """This function uses every pther one and returns the total expenses, mean expense,
+   and finally how much each person owes o how much each one gets, or if they don't
+   owe or getn nothing"""
+
+
+   print("Total expenses: {0} €".format(total))
+   print("Mean expense per person: {0} €".format(mean))
+   print("--- Final balance ---")
+   for people, wage in balances.items():
+       if wage > 0:
+           print("- {0}: gets {1} €".format(people, wage))
+       elif wage < 0:
+           print("- {0}: owes {1} €".format(people, abs(wage)))
+       else:
+           print("- {0}: is fair and square (0.00 €)".format(people))
